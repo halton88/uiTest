@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool</title>
+    <link href="https://code.jquery.com/ui/1.11.4/themes/blitzer/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/multiple-select/1.1.0/multiple-select.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet" type="text/css">
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="application/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="application/javascript"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.js" type="application/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/additional-methods.js" type="application/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/multiple-select/1.1.0/jquery.multiple.select.js" type="application/javascript"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="application/javascript"></script>
+    <script src="/common/js/popover-functions.js" type="application/javascript"></script>
+    <script src="main.js" type="application/javascript"></script>
+  </head>
+</html>
+<body><a id="skip" href="#main" class="sr-only">Go to Content</a>
+  <header><a href="http://www.nih.gov" target="_BLANK"><img src="logo.svg" alt="logo" title="logo"></a></header>
+  <div id="page-head">
+    <h1>Tool</h1>
+  </div>
+  <nav class="navbar navbar-default">
+    <button type="button" data-toggle="collapse" data-target="#main-nav" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+    <div id="main-nav" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li role="presentation" class="active"><a href="#tab-home" data-toggle="tab">Home</a></li>
+        <li role="presentation"><a id="toolTabId" href="#tab-tool" data-toggle="tab">Tool</a></li>
+        <li role="presentation"><a id="helpTabId" href="#tab-help" data-toggle="tab">Help</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div id="main" class="tab-content grey-border">
+    <section id="tab-home" class="tab-pane active">
+      <h2 class="section-title">Home</h2>
+      <div class="section-content"></div>
+    </section>
+    <section id="tab-tool" class="tab-pane">
+      <h2 class="section-title">Tool</h2>
+      <div class="section-content">
+        <div class="container">
+          <div id="errorDisplay" class="alert alert-danger box-error"></div>
+          <div id="successBox" class="alert alert-success"><span class="ui-icon ui-icon-circle-check"></span>
+            <div id="message"></div>
+          </div>
+          <div id="dialogElm"></div>
+          <form name="pathForm" action="calculate/" method="POST" enctype="multipart/form-data" class="form-horizontal">
+            <fieldset>
+              <legend data-term="study" class="termToDefine">Study Selection</legend>
+              <div id="studyEntry"></div>
+              <button title="study" class="addControl">
+                <div class="glyphicon glyphicon-plus"></div>Add Study
+              </button>
+            </fieldset>
+            <fieldset>
+              <legend data-term="file_pathway" class="termToDefine">Select or upload the pathway file:</legend>
+              <div class="col-xs-12 col-sm-6">
+                <div class="radio">               
+                  <label for="database_pathway_option">
+                    <input id="database_pathway_option" type="radio" name="pathway_type" value="database_pathway" checked="">Select from<span id="pop-list" class="termToDefine"> existing pathways:</span>
+                  </label>
+                </div>
+                <input id="database_pathway" name="database_pathway" aria-label="Search" placeholder="Search">
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="radio">
+                  <label for="file_pathway_option">
+                    <input id="file_pathway_option" type="radio" name="pathway_type" value="file_pathway">Upload from the client:
+                  </label>
+                  <input id="file_pathway" type="file" name="file_pathway" aria-label="Upload" placeholder="Upload">
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend data-term="population" class="termToDefine">Select the population:</legend>
+              <div class="form-group">
+                <label for="super_population" class="col-xs-12 col-sm-6">Super Population:</label>
+                <div class="col-xs-12 col-sm-5">
+                  <select id="super_population" name="super_population" required="">
+                    <option value="">-- Select a super population --</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="population" class="col-xs-12 col-sm-6">Sub Population:</label>
+                <div class="col-xs-12 col-sm-5 hide">
+                  <select id="population" name="population" required="" multiple></select>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Set the following options:</legend>
+              <div class="form-group">
+                <label data-term="nperm" for="nperm" class="col-xs-12 col-sm-6 termToDefine">nperm:</label>
+                <div class="col-xs-12 col-sm-5">
+                  <input id="nperm" type="text" name="nperm" value="1e+5">
+                </div>
+                <div class="col-xs-12 col-sm-11">
+                  <label for="refinep">
+                    <input id="refinep" type="checkbox" name="refinep">Refine p-Value
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label data-term="miss_rate" for="miss_rate" class="col-xs-12 col-sm-6 termToDefine">snp.miss.rate:</label>
+                <div class="col-xs-12 col-sm-5">
+                  <input id="miss_rate" type="number" name="miss_rate" value="0.05" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label data-term="maf" for="maf" class="col-xs-12 col-sm-6 termToDefine">maf:</label>
+                <div class="col-xs-12 col-sm-5">
+                  <input id="maf" type="number" name="maf" value="0.05" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label data-term="hwep" for="hwep" class="col-xs-12 col-sm-6 termToDefine">HWE.p:</label>
+                <div class="col-xs-12 col-sm-5">
+                  <input id="hwep" type="text" name="hwep" value="1e-5" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label data-term="gene" for="gene" class="col-xs-12 col-sm-6 termToDefine">Gene.R2:</label>
+                <div class="col-xs-12 col-sm-5">
+                  <input id="gene" type="number" name="gene" value="0.95" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label data-term="chr" for="chr" class="col-xs-12 col-sm-6 termToDefine">Chr.R2:</label>
+                <div class="col-xs-12 col-sm-5">
+                  <input id="chr" type="number" name="chr" value="0.95" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label data-term="gene_subset" for="gene_subset" class="col-xs-10 col-sm-6 termToDefine">rm.gene.subset:</label>
+                <div class="col-xs-2">
+                  <input id="gene_subset" type="checkbox" name="gene_subset">
+                </div>
+              </div>
+              <div class="form-group">
+                <label data-term="snp_n" for="snp_n" class="col-xs-12 col-sm-6 termToDefine">inspect.snp.n:</label>
+                <div class="col-xs-12 col-sm-5">
+                  <input id="snp_n" type="number" name="snp_n" value="5" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label data-term="snp_percent" for="snp_percent" class="col-xs-12 col-sm-6 termToDefine">inspect.snp.percent:</label>
+                <div class="col-xs-12 col-sm-5">
+                  <input id="snp_percent" type="number" name="snp_percent" value="0" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label data-term="gene_n" for="gene_n" class="col-xs-12 col-sm-6 termToDefine">inspect.gene.n:</label>
+                <div class="col-xs-12 col-sm-5">
+                  <input id="gene_n" type="number" name="gene_n" value="10" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label data-term="gene_percent" for="gene_percent" class="col-xs-12 col-sm-6 termToDefine">inspect.gene.percent:</label>
+                <div class="col-xs-12 col-sm-5">
+                  <input id="gene_percent" type="number" name="gene_percent" step=".01" value="0.05" required="">
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Results:</legend>
+              <div class="form-group"></div>
+              <label for="email" class="col-xs-12 col-sm-6">E-mail (Results will be sent here):</label>
+              <div class="col-xs-12 col-sm-5">  
+                <input id="email" type="email" name="email" required="">
+              </div>
+            </fieldset>
+            <div class="buttonGroup">
+              <button id="calculate" type="button">Calculate</button>
+              <button id="reset" type="button">Reset</button>
+              <progress value="0"></progress>
+            </div>
+          </form>
+          <div class="alert alert-info">
+            <p>If you publish results that use ARTP2, please cite:</p>
+            <p>Zhang H, Wheeler W, Hyland LP, Yang Y, Shi J, Chatterjee N, Yu K. A powerful procedure for pathway-based meta-analysis using summary statistics identifies multiple pathways associated with type II diabetes.</p>
+            <p>Yu K, Li Q, Bergen AW, Pfeiffer RM, Rosenberg PS, Caporaso N, Kraft P, Chatterjee N. (2009) Pathway analysis by adaptive combination of P-values. Genet Epidemiol 33(8): 700 - 709</p>
+            <p>Zhang H, Shi J, Liang F, Wheeler W, Stolzenberg-Solomon R, Yu K. (2014) A fast multilocus test with adaptive SNP selection for large-scale genetic association studies. European Journal of Human Genetics, 22, 696 - 702</p>
+          </div>
+          <div class="alert alert-warning">
+            Site is currently under section 508 review. This site is undergoing remediation for compliance with section 508.
+            In the interim, should you require any accessibility assistance with any content, please contact us at <a href="mailto:NCIPathwayAnalysisToolWebSupport@mail.nih.gov?subject=Pathway Tool 508">NCIPathwayAnalysisToolWebSupport@mail.nih.gov</a>. Thank you!
+          </div>
+        </div>
+      </div>
+      <div id="spinner"></div>
+    </section>
+    <section id="tab-help" class="tab-pane">
+      <h2 class="section-title">Help</h2>
+      <div class="section-content">
+        <div class="side-panel col-xs-12 col-sm-5">
+          <div class="well well-sm">
+            <h3>Table of Contents</h3>
+            <ul>
+              <li><a href="#">TBD</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="main-panel col-xs-12 col-sm-7">Content TBD......</div>
+      </div>
+    </section>
+  </div>
+  <footer class="footer">
+    <ul class="list-inline">
+      <li><a href="http://www.cancer.gov/" target="_blank" title="National Cancer Institute Home">Link 1</a></li>
+      <li><a href="mailto:NCIPathwayAnalysisToolWebSupport@mail.nih.gov" target="_blank" title="Contact us for technical support">Link 2</a></li>
+      <li><a href="http://www.cancer.gov/global/web/policies" target="_blank" title="Web Policies">Link 3</a></li>
+      <li><a href="http://www.cancer.gov/global/web/policies/accessibility" target="_blank" title="Document Viewers, Multimedia Players and Accessibility Policy">Link 4</a></li>
+      <li><a href="http://www.cancer.gov/global/web/policies/foia" target="_blank" title="Freedom of Information Act (FOIA)">Link 5</a></li>
+    </ul>
+    <ul class="list-inline">
+      <li><a target="_blank" href="http://www.dhhs.gov/">Link 6</a></li>
+      <li><a target="_blank" href="http://www.nih.gov/">Link 7</a></li>
+      <li><a target="_blank" href="http://www.cancer.gov/">Link 8</a></li>
+      <li><a target="_blank" href="http://www.usa.gov/">Link 9</a></li>
+    </ul>
+  </footer>
+  <div id="loader"><img alt="Loading.....please wait" src="images/loading.gif"></div>
+</body>
+<div id="snippets">
+  <!-- dynamic template for a study entry-->
+  <!-- display in accordion/collapsible manner-->
+  <div class="studies">
+    <div class="studyTitle">Study #</div>
+    <ul>
+      <div class="alert alert-warning">To avoid issues, please keep file sizes under 20MB. If your file is larger than this, consider compressing it or splitting it into several analyses.</div>
+      <li class="text-center"><b>Family:</b>
+        <div data-toggle="buttons" class="btn-group">
+          <label for="family" class="btn btn-default">
+            <input type="radio" name="family" aria-label="Family type bionomial" value="bionomial">Bionomial
+          </label>
+          <label for="family" class="btn btn-default active">
+            <input type="radio" name="family" aria-label="Family type gaussian" value="gaussian" checked="true">Gaussian
+          </label>
+        </div>
+      </li>
+      <li>
+        <label for="study">Browse and select study file:</label>
+        <input id="study" type="file" name="study" required="">
+      </li>
+      <li>
+        <label data-term="lambda" for="lambda" class="termToDefine">Lambda (&lambda;):</label>
+        <input id="lambda" type="text" name="lambda" value="1.0" required="">
+      </li>
+      <li>
+        <label for="num_resource">Number of data resources in this study:</label>
+        <input id="num_resource" type="text" name="num_resource" value="1" required="">
+        <ul class="resource-list"></ul>
+      </li>
+    </ul>
+  </div>
+  <li class="studyResources">
+    <div class="well well-sm">
+      <div class="row">
+        <div class="col-xs-12 col-sm-2">
+          <div class="resourceNum"></div>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <label for="sample_size">Sample Size</label>
+          <input id="sample_size" type="number" name="sample_size" min="1" value="" placeholder="sample size">
+        </div>
+        <div class="family col-xs-12 col-sm-3">
+          <label for="sample_case">Sample Size of Case</label>
+          <input id="sample_case" type="number" name="sample_case" placeholder="case">
+        </div>
+        <div class="family col-xs-12 col-sm-3">
+          <label for="sample_control">Sample Size of Control</label>
+          <input id="sample_control" type="number" name="sample_control" placeholder="control">
+        </div>
+      </div>
+    </div>
+  </li>
+</div>

@@ -1,0 +1,350 @@
+body {
+  font-size: 10pt;
+  line-height: 1.1;
+  font-family: 'Noto Sans', Arial, sans-serif;
+}
+.division-logo {
+  max-width: 600px;
+  margin-left: 3%;
+}
+.ui-autocomplete {
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-width: 300px;
+  max-height: 250px;
+}
+.ui-widget {
+  font-family: inherit;
+  font-size: inherit;
+}
+form {
+  background: #fff;
+}
+form button.ui-button-icon-only,
+form a.ui-button {
+  height: 35px;
+  margin: 0px;
+  width: 40px;
+}
+form .ms-parent {
+  width: 100%;
+}
+form .ms-parent > button {
+  width: 100% !important;
+  height: 35px;
+}
+form .radio label {
+  font-weight: bold;
+}
+form input.error,
+form select.error {
+  border: 1px solid #920000;
+  background: #f2dede;
+}
+form input.error:before,
+form select.error:before {
+  content: "*";
+  color: #f00;
+  font-weight: bold;
+  vertical-align: middle;
+  float: left;
+  padding: 0 10px;
+}
+form input:not([type='radio']):not([type='checkbox']),
+form select:not([type='radio']):not([type='checkbox']) {
+  height: 35px;
+  width: 100%;
+}
+form input.input-fit[type='text'],
+form select.input-fit[type='text'] {
+  width: 254px;
+}
+form ul#select2-database_pathway-results {
+  float: left;
+  width: 100%;
+}
+form ul.resource-list {
+  padding: 0;
+  margin: 10px auto;
+}
+form ul li {
+  list-style: none;
+}
+form ul li.studyResources .resourceNum {
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+form ul li.studyResources .family:not(.show) {
+  display: none;
+}
+form .custom-combobox {
+  position: relative;
+  display: inline-block;
+}
+form .custom-combobox a {
+  height: 33px;
+  vertical-align: bottom;
+}
+form .error.ms-choice,
+form .error.custom-combobox-input {
+  border: 1px solid #f00;
+  background: rgba(225,0,0,0.24);
+}
+form .warning {
+  background: #ffd700;
+  border: 5px solid #daa520;
+  padding: 5px;
+}
+#content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin: 0px auto;
+  max-width: 800px;
+}
+.subHeading {
+  border: 3px ridge rgba(0,66,118,0.47);
+  text-align: center;
+  padding: 1%;
+  clear: both;
+  background-color: #789;
+  color: #fff;
+}
+.subHeading a {
+  color: #fff;
+}
+.subHeading p {
+  padding: 0px 20px;
+  text-align: left;
+}
+#errorDisplay,
+#successBox {
+  clear: both;
+  text-align: center;
+}
+#errorDisplay li,
+#successBox li {
+  list-style: none;
+  margin: 0 auto;
+}
+#errorDisplay li.error,
+#successBox li.error {
+  float: none;
+}
+#successBox {
+  border: 2px solid #006400;
+  background: rgba(12,193,12,0.27);
+  margin: 1% auto;
+  color: #006400;
+}
+#successBox span {
+  width: 20px;
+  float: left;
+}
+fieldset {
+  margin: 10px auto;
+}
+legend {
+  font-weight: bold;
+  font-size: inherit;
+  padding: 10px;
+  border: 1px solid #eee;
+}
+progress {
+  display: block;
+  margin: 0 auto;
+}
+.tooltip {
+  background: url("/common/images/info.png") no-repeat center;
+  width: 16px;
+  height: 16px;
+  margin-left: 5px;
+}
+.studies ul li {
+  float: none;
+  margin: 12px 0;
+}
+.studyResources {
+  float: right;
+}
+.addControl {
+  text-align: center;
+  height: 30px;
+  margin: 2% 0;
+}
+.buttonGroup {
+  margin: 15px auto;
+  text-align: center;
+}
+.buttonGroup button {
+  width: 300px;
+  display: inline-block;
+}
+.input {
+  position: relative;
+  float: right;
+  clear: right;
+}
+.input .ms-drop {
+  left: -100px;
+}
+.input .ms-drop li:not(.group) {
+  text-indent: 20px;
+}
+#snippets,
+.hide {
+  display: none;
+}
+.notice {
+  border: 3px solid #a9a9a9;
+  background: #d3d3d3;
+  padding: 10px;
+  margin: 5px auto;
+}
+.tab-pane {
+  min-height: 500px;
+}
+#loader {
+  background-color: rgba(0,0,0,0.5);
+  background-position: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+#loader img {
+  position: inherit;
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  background: #fff;
+}
+#loader:not(.show) {
+  display: none;
+}
+#page-head,
+.section-title {
+  margin: 0 auto;
+  padding: 10px;
+  font-weight: bold;
+}
+#page-head {
+  color: #fff;
+  background: -webkit-linear-gradient(left, #bb0e3d 50%, transparent 100%);
+  background: -moz-linear-gradient(left, #bb0e3d 50%, transparent 100%);
+  background: -o-linear-gradient(left, #bb0e3d 50%, transparent 100%);
+  background: -ms-linear-gradient(left, #bb0e3d 50%, transparent 100%);
+  background: linear-gradient(to right, #bb0e3d 50%, transparent 100%);
+}
+#page-head h1 {
+  font-size: 1.3em;
+  margin: 0;
+}
+header {
+  margin: 0;
+}
+header img {
+  height: 90px;
+  width: 550px;
+}
+.tab-content {
+  margin: 0 10px;
+}
+section {
+  line-height: 1.5;
+}
+.section-title {
+  background: #123e57;
+  color: #fff;
+}
+h2 {
+  font-size: 1.1em;
+}
+.section-content {
+  padding: 10px;
+}
+.subcontent {
+  min-height: 300px;
+}
+.main-panel,
+.side-panel {
+  min-height: 500px;
+}
+.footer {
+  margin: 15px auto;
+  line-height: 1.5;
+  font-weight: bold;
+}
+.footer ul li:after {
+  content: "|";
+  padding: 0 10px;
+}
+@media (max-width: 980px) {
+  header img {
+    max-width: 360px;
+  }
+}
+@media (max-width: 768px) {
+  #main-panel,
+  #side-panel {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 990px) {
+  .tooltip {
+    display: none;
+  }
+}
+@media (min-width: 481px) and (max-width: 810px) {
+  #content {
+    max-width: 810px;
+    margin: 0px;
+    padding: 0px 5px;
+  }
+}
+@media (max-width: 990px) {
+  .ui-accordion .ui-accordion-content {
+    padding: 0.5em;
+  }
+  footer {
+    font-size: inherit;
+  }
+  footer .spacer {
+    display: none;
+  }
+  footer ul li {
+    display: block;
+    margin: 10px auto;
+    width: 100%;
+  }
+  .footer ul li:after {
+    content: initial;
+    padding: 0;
+  }
+  .tooltip {
+    -webkit-background-size: 90%;
+    -moz-background-size: 90%;
+    background-size: 90%;
+    width: 25px;
+    height: 30px;
+    padding: 5px;
+    float: right;
+  }
+  input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+  }
+}
+@media (max-width: 480px) {
+  #content {
+    width: 360px;
+  }
+  .division-logo {
+    max-width: 330px;
+  }
+}
